@@ -1,0 +1,6 @@
+<div class="taskInfo">
+	Tekan tombol <strong>Simpan</strong> untuk menyimpan kuis ini. Kuis yang sudah disimpan masih dapat dimodifikasi oleh peserta kuis.	<button class="commonButton commonButtonSpecial" id="saveQuiz" type="button">Simpan »</button>
+	<span id="chapter_58566" class="quiz_26009"></span>
+	<div class="clear"></div>
+</div>
+

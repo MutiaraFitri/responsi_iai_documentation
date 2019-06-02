@@ -1,0 +1,96 @@
+@font-face {
+    font-family: kodingan;
+    src : url('/fonts/Menlo-Regular.ttf');
+}
+.kotak-koding {
+    min-height: 30px;
+    border-radius: 10px;
+    font-family: kodingan;
+    font-weight: 100;
+    color: white;
+    overflow: hidden;
+    transition: height 1s;
+    padding-bottom: 20px;
+    background-color: #252525;
+}
+
+.judul-koding {
+    text-align: left;
+    border-radius: 10px 10px 0 0;
+    height: 30px;
+    background-color: #0f0f0f;
+    margin-bottom: 10px;
+}
+
+.judul-koding p{
+    display: inline-block;
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 15px;
+}
+
+.bulet-tutup {
+    width: 12px;
+    height: 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #fb5d56;
+}
+
+.bulet-minim {
+    width: 12px;
+    height: 12px;
+    margin-left: -5px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #ffbe2f;
+}
+
+.row-isi{
+    margin: 0px;
+}
+
+.linkku {
+    color: #cf8037;
+}
+
+.variabel {
+    color: #5ed9f8;
+}
+
+.numbering {
+    color: #686868;
+    font-size: 14px;
+    width: 50px;
+    text-align: center;
+    display: inline-block;
+}
+
+.isi {
+    display: inline-block;
+    width: 600px;
+}
+
+pre {
+    font-size: 14px;
+}
+
+.comment {
+    color: #53a333;
+}
+
+.nomor{
+    color: blue;
+}
+
+.bulet-kecil {
+    width: 12px;
+    height: 12px;
+    margin-left: -5px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #2ac940;
+}

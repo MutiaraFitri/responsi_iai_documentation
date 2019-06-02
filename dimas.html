@@ -1,0 +1,842 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Manajemen Proyek Komsi B 2019 - eLisa</title>
+		<meta name="title" content="eLisa - Manajemen Proyek Komsi B 2019" />
+		<meta name="description" content="Manajemen&nbsp;ProyekTI&nbsp;adalah&nbsp;disiplin&nbsp;ilmu &nbsp;dalam&nbsp;mengelola&nbsp;proyek-proyek&nbsp;TI agar&nbsp;lebih&nbsp;sukses &nbsp;(selaras&nbsp;dengan&nbsp;tujuan &nbsp;perusahaan) &nbsp;dengan &nbsp;menggabungkan &nbsp;konsep&nbsp;Manajemen&nbsp;Proyek&nbsp;tradisional &nbsp;dengan&nbsp;Rekayasa&nbsp;Perangkat&nbsp;Lunak/Sistem &nbsp;Informasi&nbsp;Manajemen.&nbsp;Peran&nbsp;TI &nbsp;dilebur&nbsp;dalam&nbsp;siklus&nbsp;hidup&nbsp;suatu&nbsp;proyek &nbsp;pada&nbsp;umumnya,&nbsp;yaitu&nbsp;pada &nbsp;siklus&nbsp;hidup&nbsp;pengembangan&nbsp;perangkat &nbsp;lunak&nbsp;atau&nbsp;yang&nbsp;dikenal&nbsp;dengan &nbsp;istilah&nbsp;Software Development &nbsp;Life Cycle (SDLC)." />
+		<link rel="manifest" href="https://elisa.ugm.ac.id/manifest.json">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset=utf-8>		<link rel="stylesheet" href="https://elisa.ugm.ac.id/styles/font-awesome/css/font-awesome.min.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="https://elisa.ugm.ac.id/styles/css/jquery.lightbox-0.5.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="https://elisa.ugm.ac.id/styles/loader.css" type="text/css" media="screen" />
+<link href="https://elisa.ugm.ac.id/styles/images/favicon.png" rel='Shortcut Icon' type='image/x-icon'/>
+<link href="https://elisa.ugm.ac.id/images/favicon-elisa-ugm.png" rel='Shortcut Icon' type='image/x-icon'/>
+		<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register("https://elisa.ugm.ac.id/sw.js")
+          .then(registration => {
+            console.log(`Service Worker registered! Scope: ${registration.scope}`);
+          })
+          .catch(err => {
+            console.log(`Service Worker registration failed: ${err}`);
+          });
+      });
+    }
+ </script>		<link rel="manifest" href="https://elisa.ugm.ac.id/manifest_signal.json" />
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" type="text/javascript"></script>
+<script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+        appId: "b57c1daa-0720-4b75-b4f7-b1c28758dbb9",
+        subdomainName: 'push',
+        autoRegister: true,
+    }]);
+</script>
+<script>
+    function subscribe() {
+        // OneSignal.push(["registerForPushNotifications"]);
+        OneSignal.push(["registerForPushNotifications"]);
+        event.preventDefault();
+    }
+    function unsubscribe(){
+        OneSignal.setSubscription(true);
+    }
+
+    var OneSignal = OneSignal || [];
+    OneSignal.push(function() {
+        /* These examples are all valid */
+        // Occurs when the user's subscription changes to a new value.
+        OneSignal.on('subscriptionChange', function (isSubscribed) {
+            console.log("The user's subscription state is now:", isSubscribed);
+            OneSignal.sendTag("user_id","107372", function(tagsSent)
+            {
+                OneSignal.getUserId( function(userId) {
+                    $.ajax({
+                        type: 'POST',
+                        data: 'playerid=' + userId,
+                        url: $base_url + 'user/profile/insert_playerid', dataType: 'json',
+                        success: function(response) {
+                            console.log('player_id of the subscribed success, playerid is : ' + userId);
+                        },
+                        error: function (response) {
+                           console.log(response.msg);
+                        }
+                    });
+                  // Make a POST call to your server with the user ID        
+                });
+                // Callback called when tags have finished sending
+                console.log("Tags have finished sending!");
+            });
+        });
+
+        var isPushSupported = OneSignal.isPushNotificationsSupported();
+        if (isPushSupported)
+        {
+            // Push notifications are supported
+            OneSignal.isPushNotificationsEnabled().then(function(isEnabled)
+            {
+                if (isEnabled)
+                {
+                    console.log("Push notifications are enabled!");
+
+                } else {
+                    OneSignal.showHttpPrompt();
+                }
+            });
+
+        } else {
+            console.log("Push notifications are not supported.");
+        }
+    });
+</script>	</head>
+	<body>
+		<div class="popupModalWrapper" id="popupWindowGeneric">
+	<div class="popup popupContent">
+		<div class="closeButton"></div>
+		<div class="popupInnerWrapper">
+			<div class="popupHeader">
+				<h1>Popup Caption</h1>
+			</div>
+			<div class="popupBody">
+				<div class="scrollableContent">
+					<p></p>
+				</div>
+			</div>
+			<div class="popupFooter">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popupModalWrapper" id="learningObjectivePopup">
+	<div class="popup popupContent">
+		<div class="closeButton"></div>
+		<div class="popupInnerWrapper">
+			<div class="popupHeader">
+				<h1>Tujuan Pembelajaran</h1>
+			</div>
+			<div class="popupBody potong">
+				<div class="scrollableContent">
+					<p><p><span>Manajemen&nbsp;</span><span>Proyek</span><span>TI&nbsp;</span><span>adalah&nbsp;</span><span>disiplin&nbsp;</span><span>ilmu &nbsp;</span><span>dalam&nbsp;</span><span>mengelola&nbsp;</span><span>proyek-proyek&nbsp;</span><span>TI agar&nbsp;</span><span>lebih&nbsp;</span><span>sukses &nbsp;</span><span>(</span><span>selaras&nbsp;</span><span>dengan&nbsp;</span><span>tujuan &nbsp;</span><span>perusahaan</span><span>) &nbsp;</span><span>dengan &nbsp;</span><span>menggabungkan &nbsp;</span><span>konsep&nbsp;</span><span>Manajemen&nbsp;</span><span>Proyek&nbsp;</span><span>tradisional &nbsp;</span><span>dengan&nbsp;</span><span>Rekayasa&nbsp;</span><span>Perangkat&nbsp;</span><span>Lunak</span><span>/</span><span>Sistem &nbsp;</span><span>Informasi&nbsp;</span><span>Manajemen</span><span>.&nbsp;</span><span>Peran&nbsp;</span><span>TI &nbsp;</span><span>dilebur&nbsp;</span><span>dalam&nbsp;</span><span>siklus&nbsp;</span><span>hidup&nbsp;</span><span>suatu&nbsp;</span><span>proyek &nbsp;</span><span>pada&nbsp;</span><span>umumnya</span><span>,&nbsp;</span><span>yaitu&nbsp;</span><span>pada &nbsp;</span><span>siklus&nbsp;</span><span>hidup&nbsp;</span><span>pengembangan&nbsp;</span><span>perangkat &nbsp;</span><span>lunak&nbsp;</span><span>atau&nbsp;</span><span>yang&nbsp;</span><span>dikenal&nbsp;</span><span>dengan &nbsp;</span><span>istilah&nbsp;</span><span>Software Development &nbsp;Life Cycle (SDLC</span><span>).</span></p></p>
+				</div>
+			</div>
+			<div class="popupFooter">
+			</div>
+		</div>
+	</div>
+</div>
+<div class="popupNonmodalWrapper" id="mediaPopup">
+	<div class="popup popupMedia">
+		<div class="closeButton"></div>
+		<div class="popupInnerWrapper">
+		</div>
+	</div>
+</div>
+
+			<div class="popupModalWrapper" id="sendMessagePopup">
+		<div class="popup popupContent">
+			<div class="closeButton"></div>
+			<div class="popupInnerWrapper">
+				<div class="popupHeader">
+					<h1>Kirim Email ke <span class="lecturerName"></span></h1>
+				</div>
+				<div class="popupBody">
+					<div id="sendMessage">
+
+						<form><fieldset>
+							<textarea class="inputText" rows="5" id="privateMailMessageText"></textarea>
+							<div class="notificationBox notificationInfo">Balasan dosen akan masuk ke inbox email Anda. Anda dapat mengirim email ke dosen melalui fasilitas ini setiap 5 hari sekali.</div>
+							<input type="hidden" id="privateMailReceiver"/>
+							<input type="submit" value="Kirim" class="commonButton commonButtonSpecial right" id="submitPrivateMail" />&nbsp;
+							<button class="commonButton right">Batal</button>
+						</fieldset></form>
+						<div class="clear"></div>
+					</div>
+
+					<div id="sendingMessage" class="none">
+						<div class="waitBox">
+							<p>Mengirim pesan ke email <span class="lecturerName"></span> ...</p>
+						</div>
+					</div>
+
+					<div id="confirmSentMessage" class="none">
+						<div class="successBox">
+							<p class="alignCenter"> <span class="lecturerName"></span>.</p>
+							<button class="commonButton center" id="closeSuccessSend">Ok</button>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+				<div class="popupFooter">
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="flyover flyoverEmoticons flyoverAppearsFromBottom" id="flyoverEmoticons">
+		<div class="flyoverBody">
+			<ul>
+				<li><a href="" title="Stop!"><img src="https://elisa.ugm.ac.id/images/smileys/stop.png" alt=":stop:"/></a></li>
+				<li><a href="" title="Ingat..."><img src="https://elisa.ugm.ac.id/images/smileys/remind.png" alt=":ingat:"/></a></li>
+				<li><a href="" title="Jempol!"><img src="https://elisa.ugm.ac.id/images/smileys/thumb.png" alt=":jempol:"/></a></li>
+				<li><a href="" title="Fiuh!"><img src="https://elisa.ugm.ac.id/images/smileys/sweat.png" alt=":sweat:"/></a></li>
+				<li><a href="" title="Sedih..."><img src="https://elisa.ugm.ac.id/images/smileys/sad.png" alt=":("/></a></li>
+				<li><a href="" title="Woot!"><img src="https://elisa.ugm.ac.id/images/smileys/rolleyes.png" alt="O_O"/></a></li>
+				<li><a href="" title="Ragu"><img src="https://elisa.ugm.ac.id/images/smileys/doubt.png" alt=":doubt:"/></a></li>
+				<li><a href="" title="Tertawa"><img src="https://elisa.ugm.ac.id/images/smileys/laugh.png" alt=":))"/></a></li>
+				<li><a href="" title="Senyum"><img src="https://elisa.ugm.ac.id/images/smileys/smile.png" alt=":)"/></a></li>
+				<li><a href="" title="Seringai"><img src="https://elisa.ugm.ac.id/images/smileys/grin.png" alt=":D"/></a></li>
+				<li><a href="" title="Menjulurkan lidah"><img src="https://elisa.ugm.ac.id/images/smileys/tongue.png" alt=":p"/></a></li>
+				<li><a href="" title="Kedip"><img src="https://elisa.ugm.ac.id/images/smileys/wink.png" alt=";)"/></a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<div class="flyoverArrowBottom clear"></div>
+	</div>
+
+	<div class="flyover flyoverLatex flyoverAppearsFromBottom" id="flyoverLatex">
+		<div class="flyoverBody">
+			<div class="latexEditor">
+				<div class="latexPreview">
+					<table><tbody><tr><td id="latexContainerPreview">
+						<span class="infoText" id="MathPreview">Pratayang LaTex akan muncul di sini</span>
+						<span class="infoText" id="MathBuffer" style="visibility:hidden; position:absolute; top:0; left: 0"></span>
+					</td></tr></tbody></table>
+				</div>
+				<div class="latexForm">
+					<form><fieldset>
+						<input type="text" placeholder="Isikan kode LaTeX&hellip;" id="MathInput" class="inputText" />
+						<button class="simpleButton" id="latexCodeInsertButton">Sisipkan</button>
+					</fieldset></form>
+				</div>
+			</div>
+		</div>
+		<div class="flyoverArrowBottom"></div>
+	</div>
+
+		<div class="wrapper communityPage">
+		<div class="header">
+	<div class="headerWrapper">
+		<div class="logo">
+			<h1><a href="https://elisa.ugm.ac.id/"><span>eLisa</span></a></h1>
+		</div>
+
+		<div class="nav">
+			<ul>
+			
+							<li><a href="https://elisa.ugm.ac.id/" title="Kembali ke halaman depan eLisa">Depan</a></li>
+			
+			
+				<li class="">
+					<a href="https://elisa.ugm.ac.id/profile/dimasputrayudhatama" title="Lihat profil Anda"><img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_50_50.png" alt=""></a>
+				</li>
+			
+			
+				<li><a href="https://elisa.ugm.ac.id/logout" title="Logout dari eLisa"><i class="fa fa-sign-out"></i></a></li>
+
+						</ul>
+		</div>
+	</div>
+</div>
+		<div id="content" class="content">
+	<div class="contentWrapper">
+        <div id="subhead" class="subhead">
+		<div class="communityMine">
+    <h3><a href="https://elisa.ugm.ac.id/profile">Komunitas</a></h3>
+</div>
+<div class="communityTitle">
+    <h2>Manajemen Proyek Komsi B 2019</h2>
+</div>
+<div class="community" id="community8076"></div>
+<div class="section">
+    <ul>
+                    <li class="subheadMenu menuTask">
+            <a href="#!/task" class="communityTask" id="community_8076" title="Lihat kuis &amp; tugas">Kuis &amp; Tugas</a>
+        </li>
+        
+                <li class="subheadMenu menuScore"><a href="#!/score/107372" id="" class="userid_107372" title="Lihat nilai">Nilai</a></li>
+        
+                <li class="subheadMenu menuMembers">
+                        <a href="#!/member" title="Lihat anggota">Anggota</a>
+                    </li>
+        
+    
+            </ul>
+</div>
+<div class="clear"></div>
+        </div>
+        <div id="sidebar" class="sidebar">
+		<div class="sidebarSection sectionSyllabus">
+        <ul id="syllabusList">
+        <li class="active">
+            <a href="https://elisa.ugm.ac.id/community/show/manajemen-proyek-komsi-b-2019/" class="">Bale-bale</a>
+        </li>
+                                                        <li id="section55573" class="dummy">
+                                                            <a href="#!/section/55573/1559276460" title="Silabus Manajemen Proyek">Silabus Manajemen P...</a>
+                                    </li>
+                                                            <li id="section56104" class="dummy">
+                                                            <a href="#!/section/56104/1559276460" title="Pengantar Manajemen Proyek">Pengantar Manajemen...</a>
+                                    </li>
+                                                            <li id="section56105" class="dummy">
+                                                            <a href="#!/section/56105/1559276460" title="Organisasi & Life Cycle">Organisasi & Life C...</a>
+                                    </li>
+                                                            <li id="section56902" class="dummy">
+                                                            <a href="#!/section/56902/1559276460" title="Project Management Process Group">Project Management ...</a>
+                                    </li>
+                                                            <li id="section56903" class="dummy">
+                                                            <a href="#!/section/56903/1559276460" title="Project Integration Management">Project Integration...</a>
+                                    </li>
+                                                            <li id="section56904" class="dummy">
+                                                            <a href="#!/section/56904/1559276460" title="Tugas Project Charter">Tugas Project Charter</a>
+                                    </li>
+                                                            <li id="section57742" class="dummy">
+                                                            <a href="#!/section/57742/1559276460" title="Project Scope Management">Project Scope Manag...</a>
+                                    </li>
+                                                            <li id="section58310" class="dummy">
+                                                            <a href="#!/section/58310/1559276460" title="Project Time Management">Project Time Manage...</a>
+                                    </li>
+                                                            <li id="section58311" class="dummy">
+                                                            <a href="#!/section/58311/1559276460" title="Project Cost Management">Project Cost Manage...</a>
+                                    </li>
+                                                            <li id="section58312" class="dummy">
+                                                            <a href="#!/section/58312/1559276460" title="Project Management Plan">Project Management ...</a>
+                                    </li>
+                                                            <li id="section58566" class="dummy">
+                                                            <a href="#!/section/58566/1559276460" title="PRA-UAS">PRA-UAS</a>
+                                    </li>
+                        </ul>
+        </div>
+<div class="clear"></div>
+        </div>
+        <div id="main" class="main">
+			
+	
+	
+	
+		
+		
+		
+	
+	<div class="mainLeft">
+    
+<div class="mainSection sectionWall">
+    <div class="panelHead">
+        <h3 class="left" id="balebale">Bale-bale</h3>
+                                <a href="#" id="showNewWallForm" class="commonButtonSmall right" title="Buat topik diskusi bale-bale baru"><span>+ Topik</span></a>
+                        <a href="#balebale" class="selectButtonSmall selectorButtonSelected selectButtonSmallRight right" id="showAllWall"><span>Semua</span></a>
+            <a href="#balebale" class="selectButtonSmall selectButtonSmallLeft right" id="showAdminWall"><span>Dosen</span></a>
+            <div class="clear"></div>
+
+                            <!-- New Thread Template-->
+<div id="threadTemplate" class="none"><div class="thread">
+    <!-- One Comment -->
+    <div class="post postFirst">
+        <div class="postLeft">
+            <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_50_50.png" class="postAvatar" alt="" width="50" height="50"/>
+        </div>
+        <div class="postRight">
+            <div class="contextMenuBox">
+                <div class="contextMenuButton"></div>
+                <div class="contextMenuMenu">
+                    <ul>
+                        <li><a href="#" class="deleteWallPost">Hapus</a></li>
+                    </ul>
+                </div>
+            </div>
+            <a href="https://elisa.ugm.ac.id/profile/dimasputrayudhatama/" class="postAuthor" title="Lihat profil Anda">Dimas Putra Y</a>
+            <div class="postMeta"></div>
+        </div>
+        <div class="postContent">
+            <div class="postBody"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!-- End OneComment -->
+    <div class="newCommentBox none">
+        <span>Klik untuk menampilkan tanggapan baru</span>
+    </div>
+    <!-- Post New Comment -->
+    <div class="post postComment">
+        <div class="postLeft">
+            <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" class="postAvatar" alt=""  width="30" height="30"/>
+        </div>
+        <div class="postRight">
+            <a href="https://elisa.ugm.ac.id/profile/dimasputrayudhatama/" class="postAuthor" title="Lihat profil Anda">Dimas Putra Y</a>
+            <div class="postBody">
+                <form><fieldset>
+                <textarea cols="20" rows="1" class="widget-placeholderText postContent" title="Berikan tanggapan..."></textarea>
+                <div class="newPostControl none">
+                    <ul class="extraRows">
+                    </ul>
+                    <div class="attachment">
+                        <a href="#" class="attachImage" title="Tambah Gambar"></a>
+                    </div>
+                    <input type="button" class="simpleButton" value="Kirim tanggapan" id="postWallComment"/>
+                </div>
+                </fieldset></form>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+    <!-- End Post New Comment -->
+</div></div>
+<!-- End New Thread Template -->
+
+<!-- Template Reply -->
+<div id="replyTemplate" class="none">
+    <div class="post">
+        <div class="postLeft">
+            <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" class="postAvatar" alt=""  width="30" height="30"/>
+        </div>
+
+        <div class="postRight">
+            <div class="contextMenuBox">
+                <div class="contextMenuButton"></div>
+                <div class="contextMenuMenu">
+                    <ul>
+                        <li><a href="#" class="deleteWallComment">Hapus</a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <a href="https://elisa.ugm.ac.id/profile/dimasputrayudhatama/" class="postAuthor" title="Lihat profil Anda">Dimas Putra Y</a>
+            <div class="postBody">
+            </div>
+            <div class="postMeta">
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<!-- End Template Reply -->
+            
+            </div>
+    <div class="discussions wall" id="discussions">
+        <div class="thread threadNew none" id="newWallForm">
+	<div class="post postFirst postNew">
+		<div class="postLeft">
+			<img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_50_50.png" class="postAvatar" alt="" />
+		</div>
+		<div class="postRight">
+			<a href="#" class="buttonDelete" title="Batal buat topik bale-bale"></a>
+			<a href="https://elisa.ugm.ac.id/profile/dimasputrayudhatama" class="postAuthor" title="Lihat profil Anda">Dimas Putra Y</a>
+		</div>
+		<div class="postContent">
+			<div class="postBody">
+				<form><fieldset>
+				<textarea cols="20" rows="3" class="inputText topicContent" title="Diskusi baru..."></textarea>
+				<div class="newPostControl">
+					<ul class="extraRows">
+					</ul>
+					<div class="attachment">
+											<a href="#" class="attachImage" title="Tambah Gambar"></a>
+					</div>
+					<input type="button" class="simpleButton" value="Mulai Topik" id="postWall"/>
+				</div>
+				</fieldset></form>
+			</div>
+		</div>
+		<div class="clear"></div>
+
+	</div>
+	<!-- End Post New Comment -->
+</div>
+<!-- End Post New Thread -->
+
+<div class="guideBox">Gunakan Bale-bale untuk mendiskusikan topik-topik di luar konteks kuliah. Klik "+ Topik" untuk memulai diskusi di Bale-bale.</div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="footerWrapper">
+    <div class="footer-copyright left">&copy 2004-2019 Universitas Gadjah Mada</div>
+    <div class="footer-language right">
+                <span>EN <a href="https://elisa.ugm.ac.id/welcome/set_language/en/aHR0cHM6Ly9lbGlzYS51Z20uYWMuaWQv"><img src="https://elisa.ugm.ac.id/styles/images/lang/gb.png" alt=""></a>
+        </span>
+            </div>
+<!-- Today is: 31-May-2019 11:21:00 -->
+    <div class="clear"></div>
+</div>
+</div>
+<div id="main_right" class="mainRight">
+    <div class="mainSection sectionObjective">
+    <div class="panelHead">
+        <h3 class="left">Capaian Pembelajaran</h3>
+                <div class="clear"></div>
+    </div>
+
+    
+    
+        <div class="image">
+        <a href="https://elisa.ugm.ac.id/content/files/7bd561ab39e8612eeda169e4b3381fd70/projectmanagement.jpg" class="lightBoxImage"><img class="objectiveImage" src="https://elisa.ugm.ac.id/content/files/7bd561ab39e8612eeda169e4b3381fd70/projectmanagement.jpg" alt="Ilustrasi tujuan pembelajaran"/></a>
+    </div>
+    
+    <div id="communityObjective">
+                        <p><p><span>Manajemen&nbsp;</span><span>Proyek</span><span>TI&nbsp;</span><span>adalah&nbsp;</span><span>disiplin&nbsp;</span><span>ilmu &nbsp;</span><span>dalam&nbsp;</span><span>mengelola&nbsp;</span><span>proyek-proyek&nbsp;</span><span>TI agar&nbsp;</span><span>lebih&nbsp;</span><span>sukses &nbsp;</span><span>(</span><span>selaras&nbsp;</span><span>dengan&nbsp;</span><span>tujuan &nbsp;</span><span>perusahaan</span><span>) &nbsp;</span><span>dengan &nbsp;</span><span>menggabungkan &nbsp;</span><span>konsep&nbsp;</span><span>Manajemen&nbsp;</span><span>Proyek&nbsp;</span><span>tradisional &nbsp;</span><span>dengan&nbsp;</span><span>Rekayasa&nbsp;</span><span>Perangkat&nbsp;</span><span>Lunak</span><span>/</span><span>Sistem &nbsp;</span><span>Informasi&nbsp;</span><span>Manajemen</span><span>.&nbsp;</span><span>Peran&nbsp;</span><span>TI &nbsp;</span><span>dilebur&nbsp;</span><span>dalam&nbsp;</span><span>siklus&nbsp;</span><span>hidup&nbsp;</span><span>suatu&nbsp;</span><span>proyek &nbsp;</span><span>pada&nbsp;</span><span>umumnya</span><span>,&nbsp</span></p> <a href="#" id="evokelearningObjectivePopup">Selengkapnya &raquo;</a></p>
+                </div>
+
+    <div class="clear"></div>
+</div>
+
+<div class="mainSection sectionList sectionLecturer">
+    <div class="panelHead">
+        <h3>Dosen &amp; Asisten</h3>
+        <div class="clear"></div>
+    </div>
+        <ul class="listTiles">
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/irkhamhudaf1aaa353/" id="user106070" class="userBox showUserProfile" title="Lihat profil Irkham Huda">
+                <img src="https://elisa.ugm.ac.id/content/avatar/user/106070/avatar_106070_32_32.jpg" alt="" class="userAvatar"  width="32" height="32"/>
+                <span class="userName" title="Irkham Huda">Irkham Huda</span>
+                            <span class="userMeta"> Sekolah Vokasi </span>
+                        </a>
+                        <a href="#" class="sendMail sendPrivateMail" title="Kirim email langsung ke dosen"></a>
+                    </li>
+            </ul>
+    
+    <div class="clear"></div>
+</div>
+
+<div class="mainSection sectionList sectionMembers">
+    <div class="panelHead">
+        <h3>Anggota <span class="numStudents"></span></h3>
+                <div class="clear"></div>
+    </div>
+        <ul class="listSmallIcons">
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/abdullahazzamazhar/" title="Abdullah Azzam Azhar">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Abdullah Azzam Azhar</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/adedwiputra/" title="Ade Dwi Putra">
+                <img src="https://elisa.ugm.ac.id/content/avatar/user/99714/avatar_550831_24_24.jpg" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Ade Dwi Putra</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/adipriyono/" title="Adi Priyono">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Adi Priyono</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/albertmartinpalmalino0e2a7220/" title="albert martin palmalino">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">albert martin palmalino</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/alfathressyajiaurume61d9210/" title="Alfath ressy ajiaurum">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Alfath ressy ajiaurum</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/amaliarizkia/" title="Amalia Rizkia">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Amalia Rizkia</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/anggitprayoga/" title="Anggit Prayoga">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Anggit Prayoga</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/anisyamaulina/" title="Anisya Maulina">
+                <img src="https://elisa.ugm.ac.id/content/avatar/user/99598/avatar_550846_24_24.jpg" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Anisya Maulina</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/azisnurridwan/" title="Azis Nur Ridwan">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Azis Nur Ridwan</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/bellawulannoviawati9d4d594e/" title="BELLA WULAN NOVIAWATI">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">BELLA WULAN NOVIAWATI</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/candrafebriantowibowo/" title="Candra Febrianto Wibowo">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Candra Febrianto Wibowo</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/deviqurniasari12679b19/" title="Devi Qurnia Sari">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Devi Qurnia Sari</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/dimasputrayudhatama/" title="Dimas Putra Y">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Dimas Putra Y</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/doniprihantoronursetyoutomo/" title="Doni Prihantoro Nur Setyo Utomo">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Doni Prihantoro Nur Setyo Utomo</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/egaaryapradipta/" title="Ega Arya Pradipta">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Ega Arya Pradipta</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/elangbayuajihartanto5bfa73bd/" title="Elang Bayu Aji Hartanto">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Elang Bayu Aji Hartanto</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/esterprenataliaadi7d4db7d2/" title="Ester Prenatalia Adi">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Ester Prenatalia Adi</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/fahminurrosyid60792960/" title="Fahmi Nur Rosyid">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Fahmi Nur Rosyid</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/fahmijunaedi/" title="Fahmi Junaedi">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Fahmi Junaedi</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/fikriulinukha/" title="Fikri Ulinukha">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Fikri Ulinukha</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/fitrohgalihprayogo/" title="Fitroh Galih Prayogo">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Fitroh Galih Prayogo</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/fransiskadyahayunatalia/" title="Fransiska Dyah Ayu Natalia">
+                <img src="https://elisa.ugm.ac.id/content/avatar/user/108632/avatar_550855_24_24.jpg" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Fransiska Dyah Ayu Natalia</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/fridayanditarachmadsantoso/" title="Friday Andita Rachmad Santoso">
+                <img src="https://elisa.ugm.ac.id/content/avatar/user/98299/avatar_550835_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Friday Andita Rachmad Santoso</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/gigihridhoridhana/" title="Gigih Ridho Ridhana">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Gigih Ridho Ridhana</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/ilhamwibisoo/" title="Ilham Wibisono">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Ilham Wibisono</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/jaffarjatmikojati/" title="Jaffar Jatmiko Jati">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Jaffar Jatmiko Jati</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/melanianurfitriansa43e5009d/" title="Melania Nur Fitriansa">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Melania Nur Fitriansa</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/mohkemalha/" title="MOH. KEMAL H.A">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">MOH. KEMAL H.A</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/muhammadyudhaprastyaf8dd3ec6/" title="Muhammad Yudha Prastya">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Muhammad Yudha Prastya</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/muhammadabdurrahman1056186f/" title="Muhammad Abdurrahman">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Muhammad Abdurrahman</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/muhammadabdurrahman41144365/" title="Muhammad Abdurrahman">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Muhammad Abdurrahman</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/muhammadfadhlanahfazha3f278d3/" title="Muhammad Fadhlan Ahfazh">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Muhammad Fadhlan Ahfazh</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/mutiarafitritasir/" title="Mutiara Fitri Tasir">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Mutiara Fitri Tasir</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/nahdiaranisholihahccb92d5e/" title="Nahdia Rani Sholihah">
+                <img src="https://elisa.ugm.ac.id/content/avatar/user/98292/avatar_557301_24_24.jpg" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Nahdia Rani Sholihah</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/pintasarinugraheni/" title="Pintasari Nugraheni">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Pintasari Nugraheni</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/pratitasujatmika/" title="Pratita Sujatmika">
+                <img src="https://elisa.ugm.ac.id/content/avatar/user/99934/avatar_552601_24_24.jpg" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Pratita Sujatmika</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/rahmatunnisya/" title="rahmatunnisya">
+                <img src="https://elisa.ugm.ac.id/content/avatar/user/98511/avatar_550857_24_24.jpg" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">rahmatunnisya </span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/risangnihapsaripurwaningmadyasakti/" title="Risang Nihapsari Purwaning Madya Sakti">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Risang Nihapsari Purwaning Madya Sakti</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/rosyidinadinegara/" title="Rosyidin Adinegara">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Rosyidin Adinegara</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/sabdobramastyob2075e87/" title="Sabdo Bramastyo">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Sabdo Bramastyo</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/sintiyadewiprihatiningsih94769989/" title="Sintiya Dewi Prihatiningsih">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Sintiya Dewi Prihatiningsih</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/sitiharyuningsih/" title="Siti Haryuningsih">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Siti Haryuningsih</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/supriyatic89fc0af/" title="Supriyati">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Supriyati </span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/talithaluthfiaizzap/" title="Talitha Luthfia Izza P.">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Talitha Luthfia Izza P.</span>
+            </a>
+        </li>
+                <li>
+            <a href="https://elisa.ugm.ac.id/profile/vickyhermawan/" title="Vicky Hermawan">
+                <img src="https://elisa.ugm.ac.id/content/avatar/avatar_elisa_mahasiswa_24_24.png" alt="" class="userAvatar"  width="24" height="24"/>
+                <span class="itemTooltip">Vicky Hermawan</span>
+            </a>
+        </li>
+            </ul>
+        <div class="clear"></div>
+        <div class="memberCount">45 Anggota</div>
+    </div>
+
+<div class="mainSection sectionList ">
+    <p>Apakah Manajemen Proyek Komsi B 2019 bukan komunitas Anda? <a href="#" id="leaveCommunity" title="Keluar dari komunitas ini">Klik di sini untuk mundur</a> dari komunitas ini.</p>
+    <div class="clear"></div>
+</div>
+</div>
+        </div>
+		<div class="clear"></div>
+	</div>
+</div>
+		<div class="footer">
+	<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/libraries/jquery.min.js"></script>
+	<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/libraries/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/libraries/jquery.ba-hashchange.min.js"></script>
+	<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/libraries/jquery.lightbox-0.5.pack.js"></script>
+	<script type="text/javascript">	var $base_url = 'https://elisa.ugm.ac.id/'; </script>
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-17881246-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+		<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/libraries/mediaplayer-5.8/jwplayer.js"></script>
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    showProcessingMessages: false,
+	    messageStyle: "none",
+	    menuSettings: { context: "Browser", zoom: "No zoom", zscale: "200%", texHints: true },
+	    TeX: { extensions: ["mhchem.js", "cancel.js"] },
+	    tex2jax: {
+	    	inlineMath: [ ['$$','$$'], ['\\(','\\)'], ['[tex]','[/tex]'] ],
+	    	displayMath: [ ['[$','$]'], ['\\[','\\]'], ['[latex]','[/latex]'] ]
+	    },
+	    asciimath2jax: { delimiters: [['`','`']] }
+	  });
+	</script>
+	<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/libraries/mathjax/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+	<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/libraries/downloader/jquery.fileDownload.js"></script>
+		<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/libraries/uploader/ajaxfileupload.js"></script>
+	
+	<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/libraries/SyntaxHighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+			<script type="text/javascript">	var $community_id = 8076; </script>
+	<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/elisa.ui.func.js"></script>
+	<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/elisa.ui.collab.js"></script>
+	<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/elisa.ui.0.js"></script>
+	<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/elisa.ui.1.js"></script>
+		<script type="text/javascript" src="https://elisa.ugm.ac.id/scripts/elisa.ui.2.js"></script>
+		
+
+</div>
+		<div class="clear"></div>
+		</div>
+	</body>
+</html>
